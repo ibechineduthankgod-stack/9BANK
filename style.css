@@ -19,34 +19,25 @@ min-height:100vh;
 position:relative;
 }
 
-/* WATERMARK LOGO */
-
 body::before{
-
 content:"";
-
 position:fixed;
-
 top:50%;
 left:50%;
-
 transform:translate(-50%,-50%);
 
 width:900px;
 height:900px;
 
-background-image:url("./images/logo.png");
-
+background-image:url("/9BANK/images/logo.png");
 background-repeat:no-repeat;
 background-position:center;
 background-size:contain;
 
-opacity:0.04;
-
-z-index:-1;
+opacity:0.05;
 
 pointer-events:none;
-
+z-index:-1;
 }
 
 .navbar{
@@ -373,4 +364,65 @@ margin-bottom:40px;
 
 box-shadow:0 10px 20px rgba(0,0,0,0.1);
 
+}
+.dashboard{
+padding:80px;
+}
+
+.dashboard-cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-bottom:40px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+.bank-card{
+width:350px;
+height:200px;
+
+background:linear-gradient(135deg,#0b3d91,#1e66ff);
+
+color:white;
+
+border-radius:16px;
+
+padding:20px;
+
+margin:40px 0;
+}
+
+.card-number{
+font-size:22px;
+letter-spacing:3px;
+margin:30px 0;
+}
+
+.transfer-box{
+background:white;
+padding:30px;
+border-radius:10px;
+width:300px;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+.transfer-box input{
+display:block;
+width:100%;
+margin:10px 0;
+padding:10px;
+}
+
+.transfer-box button{
+background:#0b3d91;
+color:white;
+padding:10px;
+border:none;
+width:100%;
 }

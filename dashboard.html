@@ -13,7 +13,7 @@ DOCTYPE html>
 <header class="navbar">
 
 <div class="logo">
-<img src="./images/logo.png" alt="9Bank Logo">
+<img src="/9BANK/images/logo.png" alt="9Bank Logo">
 </div>
 
 <nav>
@@ -27,7 +27,7 @@ DOCTYPE html>
 <div class="bank-card">
 
 <div class="card-logo">
-<img src="./images/logo.png" alt="9Bank Logo">
+<img src="/9BANK/images/logo.png" alt="9Bank Logo">
 </div>
 
 <div class="card-number">
@@ -59,134 +59,59 @@ DOCTYPE html>
 
 <section class="dashboard">
 
-<div class="balance-card">
+<h2>Welcome Back, John</h2>
 
-<h3>Available Balance</h3>
+<div class="dashboard-cards">
 
-<h1>$24,850.00</h1>
-
-<p>Account Number: 938402192</p>
-
-<p>Account Holder: John Smith</p>
-
+<div class="card">
+<h3>Account Balance</h3>
+<h1>$24,580</h1>
+<p>Account No: 903482912</p>
 </div>
 
-
-<div class="dashboard-grid">
-
-<div class="box">
-
-<h3>Transfer Money</h3>
-
-<input placeholder="Recipient Account">
-
-<input placeholder="Amount">
-
-<button>Send Transfer</button>
-
+<div class="card">
+<h3>Total Deposits</h3>
+<h1>$58,200</h1>
 </div>
 
-
-<div class="box">
-
-<h3>Pay Bills</h3>
-
-<input placeholder="Bill Name">
-
-<input placeholder="Amount">
-
-<button>Pay Bill</button>
-
-</div>
-
-
-<div class="box">
-
-<h3>International Transfer</h3>
-
-<input placeholder="IBAN / Account Number">
-
-<input placeholder="Amount">
-
-<button>Send</button>
-
+<div class="card">
+<h3>Total Transfers</h3>
+<h1>$12,850</h1>
 </div>
 
 </div>
 
 
-<div class="transactions">
+<div class="bank-card">
 
-<h2>Recent Transactions</h2>
+<div class="card-logo">
+<img src="/9BANK/images/logo.png">
+</div>
 
-<table>
+<div class="card-number">
+**** **** **** 4821
+</div>
 
-<tr>
-<th>Date</th>
-<th>Description</th>
-<th>Amount</th>
-<th>Status</th>
-</tr>
+<div class="card-holder">
+John Smith
+</div>
 
-<tr>
-<td>May 12</td>
-<td>Amazon Purchase</td>
-<td>-$250</td>
-<td>Completed</td>
-</tr>
+<div class="card-exp">
+12 / 28
+</div>
 
-<tr>
-<td>May 10</td>
-<td>Salary Deposit</td>
-<td>$1200</td>
-<td>Completed</td>
-</tr>
+</div>
 
-<tr>
-<td>May 09</td>
-<td>Netflix</td>
-<td>-$60</td>
-<td>Completed</td>
-</tr>
 
-</table>
+<div class="transfer-box">
+
+<h3>Quick Transfer</h3>
+
+<input type="text" placeholder="Recipient Account">
+<input type="number" placeholder="Amount">
+
+<button>Send Money</button>
 
 </div>
 
 </section>
-<script>
-
-const ctx = document.getElementById('financeChart');
-
-new Chart(ctx, {
-
-type: 'line',
-
-data: {
-
-labels: ['Jan','Feb','Mar','Apr','May','Jun'],
-
-datasets: [{
-
-label: 'Account Activity',
-
-data: [2000, 3500, 4200, 3800, 5200, 6100],
-
-borderWidth:3
-
-}]
-
-},
-
-options: {
-
-responsive:true
-
-}
-
-});
-
-</script>
-
-</body>
-</html>
