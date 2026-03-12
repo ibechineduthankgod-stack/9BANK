@@ -5,6 +5,7 @@ DOCTYPE html>
 <head>
 <title>9Bank Dashboard</title>
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -26,7 +27,7 @@ DOCTYPE html>
 <div class="bank-card">
 
 <div class="card-logo">
-<img src="./images/logo.png">
+<img src="./images/logo.png" alt="9Bank Logo">
 </div>
 
 <div class="card-number">
@@ -48,6 +49,14 @@ DOCTYPE html>
 </div>
 
 </div>
+<div class="chart-box">
+
+<h2>Account Activity</h2>
+
+<canvas id="financeChart"></canvas>
+
+</div>
+
 <section class="dashboard">
 
 <div class="balance-card">
@@ -145,6 +154,39 @@ DOCTYPE html>
 </div>
 
 </section>
+<script>
+
+const ctx = document.getElementById('financeChart');
+
+new Chart(ctx, {
+
+type: 'line',
+
+data: {
+
+labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+
+datasets: [{
+
+label: 'Account Activity',
+
+data: [2000, 3500, 4200, 3800, 5200, 6100],
+
+borderWidth:3
+
+}]
+
+},
+
+options: {
+
+responsive:true
+
+}
+
+});
+
+</script>
 
 </body>
 </html>

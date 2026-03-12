@@ -21,3 +21,17 @@ element.innerText=count.toLocaleString()
 counter("users",900000)
 counter("transactions",3200000)
 counter("downloads",800000)
+
+let index=0
+
+const testimonials=document.querySelectorAll(".testimonial")
+
+setInterval(()=>{
+
+testimonials[index].classList.remove("active")
+
+index=(index+1)%testimonials.length
+
+testimonials[index].classList.add("active")
+
+},4000)
