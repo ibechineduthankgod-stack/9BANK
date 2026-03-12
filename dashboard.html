@@ -1,4 +1,3 @@
-DOCTYPE html>
 <!DOCTYPE html>
 <html>
 
@@ -24,21 +23,22 @@ DOCTYPE html>
 
 </header>
 
-
-
-</div>
-<div class="chart-box">
-
-<h2>Account Activity</h2>
-
-<canvas id="financeChart"></canvas>
-
-</div>
-
 <section class="dashboard">
 
-<h2>Welcome Back, John</h2>
+<h2 class="welcome">Welcome Back, John</h2>
 
+<!-- BALANCE -->
+
+<div class="balance-card">
+<h3>Available Balance</h3>
+<h1>$24,850.00</h1>
+<p>Account Number: 938402192</p>
+<p>Account Holder: John Smith</p>
+</div>
+
+<!-- DASHBOARD GRID -->
+
+<div class="dashboard-grid">
 
 <div class="bank-card">
 
@@ -60,7 +60,6 @@ John Smith
 
 </div>
 
-
 <div class="transfer-box">
 
 <h3>Quick Transfer</h3>
@@ -72,4 +71,100 @@ John Smith
 
 </div>
 
+</div>
+
+<!-- STATS -->
+
+<div class="dashboard-cards">
+
+<div class="card">
+<h3>Total Deposits</h3>
+<h2>$58,200</h2>
+</div>
+
+<div class="card">
+<h3>Total Transfers</h3>
+<h2>$12,850</h2>
+</div>
+
+<div class="card">
+<h3>Pending Payments</h3>
+<h2>$1,200</h2>
+</div>
+
+</div>
+
+<!-- CHART + TRANSACTIONS -->
+
+<div class="activity-grid">
+
+<div class="chart-box">
+
+<h3>Account Activity</h3>
+<canvas id="financeChart"></canvas>
+
+</div>
+
+<div class="transactions">
+
+<h3>Recent Transactions</h3>
+
+<table>
+
+<tr>
+<th>Date</th>
+<th>Description</th>
+<th>Amount</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>May 12</td>
+<td>Amazon Purchase</td>
+<td>- $250</td>
+<td>Completed</td>
+</tr>
+
+<tr>
+<td>May 10</td>
+<td>Salary Deposit</td>
+<td>+ $1200</td>
+<td>Completed</td>
+</tr>
+
+<tr>
+<td>May 09</td>
+<td>Netflix</td>
+<td>- $60</td>
+<td>Completed</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
 </section>
+
+<script>
+
+const ctx=document.getElementById("financeChart")
+
+new Chart(ctx,{
+type:"line",
+data:{
+labels:["Jan","Feb","Mar","Apr","May","Jun"],
+datasets:[{
+label:"Account Balance",
+data:[2000,3500,4200,3800,5200,6100],
+borderWidth:3
+}]
+},
+options:{responsive:true}
+})
+
+</script>
+
+</body>
+</html>
