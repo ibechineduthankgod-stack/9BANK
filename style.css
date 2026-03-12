@@ -29,7 +29,7 @@ transform:translate(-50%,-50%);
 width:900px;
 height:900px;
 
-background-image:url("/images/logo.png.png");
+background-image:url("images/logo.png");
 background-repeat:no-repeat;
 background-position:center;
 background-size:contain;
@@ -153,12 +153,47 @@ padding:80px;
 background:#f4f7fb;
 }
 
-.balance-card{
-background:#0b3d91;
+.bank-card{
+
+width:360px;
+height:210px;
+
+background:linear-gradient(135deg,#c4002f,#ff2d55);
+
+border-radius:16px;
+
+padding:25px;
+
 color:white;
-padding:40px;
-border-radius:12px;
-margin-bottom:40px;
+
+box-shadow:0 15px 30px rgba(0,0,0,0.25);
+
+position:relative;
+
+margin:40px 0;
+
+}
+
+.card-logo img{
+width:60px;
+opacity:0.8;
+}
+
+.card-number{
+font-size:22px;
+letter-spacing:4px;
+margin:35px 0;
+}
+
+.card-holder{
+font-size:14px;
+}
+
+.card-exp{
+position:absolute;
+bottom:20px;
+right:25px;
+font-size:14px;
 }
 
 .dashboard-grid{
