@@ -12,21 +12,21 @@ position:relative;
 min-height:100vh;
 }
 
-/* WATERMARK LOGO */
-
 body::before{
 content:"";
 position:fixed;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-width:900px;
-height:900px;
+width:800px;
+height:800px;
 
-background:url("images/logo.png") no-repeat center;
+background-image:url("./images/logo.png");
+background-repeat:no-repeat;
+background-position:center;
 background-size:contain;
 
-opacity:0.06;
+opacity:0.05;
 
 pointer-events:none;
 z-index:-1;
@@ -285,4 +285,62 @@ border-collapse:collapse;
 padding:12px;
 border-bottom:1px solid #ddd;
 text-align:left;
+}
+.bank-card{
+
+width:350px;
+height:200px;
+
+background:linear-gradient(135deg,#0b3d91,#1e66ff);
+
+border-radius:16px;
+
+color:white;
+
+padding:20px;
+
+margin-bottom:40px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+
+}
+
+.card-logo img{
+
+width:60px;
+opacity:0.8;
+
+}
+
+.card-number{
+
+font-size:22px;
+
+letter-spacing:3px;
+
+margin:30px 0;
+
+}
+
+.card-holder span,
+.card-exp span{
+
+font-size:12px;
+opacity:0.7;
+
+}
+
+.card-holder p,
+.card-exp p{
+
+font-size:14px;
+
+}
+
+.card-exp{
+
+float:right;
+
+margin-top:-35px;
+
 }
