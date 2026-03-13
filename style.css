@@ -90,18 +90,24 @@ font-size:16px;
 /* STATS */
 
 .stats{
-background:white;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:30px;
 padding:80px;
+background:#f4f7fb;
 text-align:center;
 }
 
 .stat-card{
-background:#f4f7fb;
+background:white;
 padding:40px;
-border-radius:10px;
+border-radius:14px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.stat-card h2{
+font-size:40px;
+color:#0b3d91;
 }
 
 /* SERVICES */
@@ -135,19 +141,37 @@ text-align:center;
 }
 
 .testimonial-container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-margin-top:40px;
+max-width:700px;
+margin:auto;
+position:relative;
+overflow:hidden;
 }
 
 .testimonial{
+display:none;
 background:#f4f7fb;
 padding:30px;
 border-radius:10px;
 font-style:italic;
+transition:0.5s;
 }
 
+.testimonial.active{
+display:block;
+animation:fadeSlide 0.8s;
+}
+
+@keyframes fadeSlide{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
 /* FORM */
 
 .form-container{
@@ -236,15 +260,32 @@ cursor:pointer;
 /* RED FINTECH CARD */
 
 .bank-card{
+
 width:360px;
 height:210px;
-background:linear-gradient(135deg,#c4002f,#ff2d55);
+
+background:linear-gradient(135deg,#ff2d55,#c4002f);
+
 border-radius:16px;
+
 padding:25px;
+
 color:white;
-box-shadow:0 20px 40px rgba(0,0,0,0.3);
-position:relative;
-margin:40px auto;
+
+margin-bottom:40px;
+
+box-shadow:0 25px 40px rgba(0,0,0,0.3);
+
+transition:transform 0.6s;
+
+transform-style:preserve-3d;
+
+}
+
+.bank-card:hover{
+
+transform:rotateY(15deg) rotateX(8deg);
+
 }
 
 .card-logo img{
@@ -361,12 +402,26 @@ margin-bottom:40px;
 }
 
 .card{
-background:white;
+
+background:rgba(255,255,255,0.7);
+
+backdrop-filter:blur(10px);
+
 padding:30px;
-border-radius:10px;
-box-shadow:0 8px 20px rgba(0,0,0,0.1);
+
+border-radius:12px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+
+transition:0.3s;
+
 }
 
+.card:hover{
+
+transform:translateY(-6px);
+
+}
 
 .transfer-box{
 background:white;

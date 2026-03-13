@@ -23,15 +23,55 @@ counter("transactions",3200000)
 counter("downloads",800000)
 
 let index=0
+let testimonialIndex = 0;
 
-const testimonials=document.querySelectorAll(".testimonial")
+const testimonial = document.querySelectorAll(".testimonial");
 
-setInterval(()=>{
+function showTestimonials(){
 
-testimonials[index].classList.remove("active")
+testimonial.forEach(t=>{
+t.classList.remove("active")
+})
 
-index=(index+1)%testimonials.length
+testimonial[testimonialIndex].classList.add("active")
 
-testimonials[index].classList.add("active")
+testimonialIndex++
 
-},4000)
+if(testimonialIndex >= testimonial.length){
+testimonialIndex = 0
+}
+
+}
+
+setInterval(showTestimonials,4000)
+const counters=document.querySelectorAll(".counter")
+
+counters.forEach(counter=>{
+
+counter.innerText="0"
+
+const updateCounter=()=>{
+
+const target=+counter.getAttribute("data-target")
+
+const c=+counter.innerText
+
+const increment=target/200
+
+if(c<target){
+
+counter.innerText=`${Math.ceil(c+increment)}`
+
+setTimeout(updateCounter,10)
+
+}else{
+
+counter.innerText=target
+
+}
+
+}
+
+updateCounter()
+
+})
