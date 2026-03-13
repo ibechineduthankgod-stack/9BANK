@@ -30,10 +30,15 @@
 <!-- BALANCE -->
 
 <div class="balance-card">
+
 <h3>Available Balance</h3>
-<h1>$24,850.00</h1>
+
+<h1 id="balance">$24,850</h1>
+
 <p>Account Number: 938402192</p>
+
 <p>Account Holder: John Smith</p>
+
 </div>
 
 <!-- DASHBOARD GRID -->
@@ -64,16 +69,15 @@ John Smith
 
 <h3>Quick Transfer</h3>
 
-<input id="account" type="text" placeholder="Recipient Account">
+<input id="account" type="text" placeholder="Recipient Account Number">
 
 <input id="amount" type="number" placeholder="Amount">
 
-<button onclick="sendMoney()">Send Money</button>
+<button id="sendBtn">Send Money</button>
 
 <p id="transferMessage"></p>
 
 </div>
-
 </div>
 
 <!-- STATS -->
@@ -107,12 +111,11 @@ John Smith
 <canvas id="financeChart"></canvas>
 
 </div>
-
 <div class="transactions">
 
 <h3>Recent Transactions</h3>
 
-<table>
+<table id="transactionTable">
 
 <tr>
 <th>Date</th>
@@ -149,24 +152,6 @@ John Smith
 </div>
 
 </section>
-
-<script>
-
-const ctx=document.getElementById("financeChart")
-
-new Chart(ctx,{
-type:"line",
-data:{
-labels:["Jan","Feb","Mar","Apr","May","Jun"],
-datasets:[{
-label:"Account Balance",
-data:[2000,3500,4200,3800,5200,6100],
-borderWidth:3
-}]
-},
-options:{responsive:true}
-})
-
-</script>
+<script src="script.js"></script>
 </body>
 </html>
