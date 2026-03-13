@@ -64,10 +64,13 @@ John Smith
 
 <h3>Quick Transfer</h3>
 
-<input type="text" placeholder="Recipient Account">
-<input type="number" placeholder="Amount">
+<input id="account" type="text" placeholder="Recipient Account">
 
-<button>Send Money</button>
+<input id="amount" type="number" placeholder="Amount">
+
+<button onclick="sendMoney()">Send Money</button>
+
+<p id="transferMessage"></p>
 
 </div>
 
@@ -165,6 +168,5 @@ options:{responsive:true}
 })
 
 </script>
-
 </body>
 </html>

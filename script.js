@@ -75,3 +75,49 @@ counter.innerText=target
 updateCounter()
 
 })
+function sendMoney(){
+
+let amount=document.getElementById("amount").value
+
+let message=document.getElementById("transferMessage")
+
+if(amount===""){
+
+message.innerText="Enter an amount"
+
+return
+
+}
+
+message.innerText="Transfer Successful"
+
+addTransaction(amount)
+
+updateBalance(amount)
+
+}
+let balance=24850
+
+function updateBalance(amount){
+
+balance=balance-amount
+
+document.querySelector(".balance-card h1").innerText="$"+balance
+
+}
+function addTransaction(amount){
+
+let table=document.querySelector(".transactions table")
+
+let row=table.insertRow(-1)
+
+row.innerHTML=`
+
+<td>Today</td>
+<td>Transfer</td>
+<td>-$${amount}</td>
+<td>Completed</td>
+
+`
+
+}
