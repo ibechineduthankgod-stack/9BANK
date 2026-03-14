@@ -234,7 +234,7 @@ margin-bottom:40px;
 
 .box{
 background:white;
-padding:30px;
+padding: 60px;
 border-radius:10px;
 box-shadow:0 5px 15px rgba(0,0,0,0.1);
 display:flex;
@@ -314,22 +314,32 @@ font-size:14px;
 
 /* TRANSACTIONS */
 
-.transactions{
-background:white;
-padding:30px;
-border-radius:10px;
-}
-
-.transactions table{
-width:100%;
-border-collapse:collapse;
-}
-
-.transactions th,
-.transactions td{
-padding:12px;
-border-bottom:1px solid #ddd;
-text-align:left;
+.activity-grid{ 
+    display:grid; 
+    grid-template-columns:2fr 1fr; 
+    gap:30px; } 
+    
+.chart-box{ 
+    background:white; 
+    padding:25px; 
+    border-radius:12px; 
+    box-shadow:0 10px 20px rgba(0,0,0,0.1); 
+} 
+.transactions{ 
+    background:white; 
+    padding:25px; 
+    border-radius:12px; 
+    box-shadow:0 10px 20px rgba(0,0,0,0.1); 
+} 
+.transactions table{ 
+    width:100%; 
+    border-collapse:collapse; 
+} 
+.transactions th, 
+.transactions td{ 
+    padding:12px; 
+    border-bottom:1px solid #eee; 
+    text-align:left; 
 }
 
 /* CHART */
@@ -537,11 +547,6 @@ border-radius:12px;
 box-shadow:0 10px 20px rgba(0,0,0,0.1);
 }
 
-.activity-grid{
-display:grid;
-grid-template-columns:2fr 1fr;
-gap:30px;
-}
 
 .chart-box{
 background:white;
@@ -550,24 +555,6 @@ border-radius:12px;
 box-shadow:0 10px 20px rgba(0,0,0,0.1);
 }
 
-.transactions{
-background:white;
-padding:25px;
-border-radius:12px;
-box-shadow:0 10px 20px rgba(0,0,0,0.1);
-}
-
-.transactions table{
-width:100%;
-border-collapse:collapse;
-}
-
-.transactions th,
-.transactions td{
-padding:12px;
-border-bottom:1px solid #eee;
-text-align:left;
-}
 .notification{
 position:fixed;
 top:20px;
