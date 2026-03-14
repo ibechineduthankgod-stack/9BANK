@@ -1,18 +1,55 @@
+/* =========================
+   BIG HOMEPAGE COUNTERS
+========================= */
+
+const counters = document.querySelectorAll(".counter")
+
+counters.forEach(counter => {
+
+let target = +counter.getAttribute("data-target")
+let count = 0
+
+let updateCounter = () => {
+
+let increment = target / 200
+
+count += increment
+
+if(count >= target){
+counter.innerText = target.toLocaleString()
+}
+else{
+counter.innerText = Math.floor(count).toLocaleString()
+requestAnimationFrame(updateCounter)
+}
+
+}
+
+updateCounter()
+
+})
+
+/* =========================
+   HOMEPAGE COUNTERS
+========================= */
+
 function counter(id,target){
 
-let count=0
-let element=document.getElementById(id)
+let count = 0
+let element = document.getElementById(id)
 
-let interval=setInterval(()=>{
+if(!element) return
 
-count+=Math.ceil(target/100)
+let interval = setInterval(()=>{
 
-if(count>=target){
-count=target
+count += Math.ceil(target/100)
+
+if(count >= target){
+count = target
 clearInterval(interval)
 }
 
-element.innerText=count.toLocaleString()
+element.innerText = count.toLocaleString()
 
 },20)
 
@@ -22,12 +59,17 @@ counter("users",900000)
 counter("transactions",3200000)
 counter("downloads",800000)
 
-let index=0
-let testimonialIndex = 0;
 
-const testimonial = document.querySelectorAll(".testimonial");
+/* =========================
+   TESTIMONIAL SLIDER
+========================= */
+
+let testimonialIndex = 0
+const testimonial = document.querySelectorAll(".testimonial")
 
 function showTestimonials(){
+
+if(testimonial.length === 0) return
 
 testimonial.forEach(t=>{
 t.classList.remove("active")
@@ -44,118 +86,166 @@ testimonialIndex = 0
 }
 
 setInterval(showTestimonials,4000)
-const counters=document.querySelectorAll(".counter")
 
-counters.forEach(counter=>{
 
-counter.innerText="0"
+/* =========================
+   DARK MODE
+========================= */
 
-const updateCounter=()=>{
+const darkBtn = document.getElementById("darkToggle");
 
-const target=+counter.getAttribute("data-target")
+darkBtn.addEventListener("click", () => {
+document.body.classList.toggle("dark-mode");
+});
 
-const c=+counter.innerText
 
-const increment=target/200
+/* =========================
+   BANK BALANCE SYSTEM
+========================= */
 
-if(c<target){
+let balance = localStorage.getItem("balance")
+? parseFloat(localStorage.getItem("balance"))
+: 24850
 
-counter.innerText=`${Math.ceil(c+increment)}`
 
-setTimeout(updateCounter,10)
+function updateBalanceDisplay(){
 
-}else{
+let balanceText = document.getElementById("balance")
 
-counter.innerText=target
-
+if(balanceText){
+balanceText.innerText = "$" + balance.toLocaleString()
 }
 
 }
 
-updateCounter()
+updateBalanceDisplay()
 
-})
-function sendMoney(){
 
-let amount=document.getElementById("amount").value
+/* =========================
+   SEND MONEY SYSTEM
+========================= */
 
-let message=document.getElementById("transferMessage")
+const sendBtn = document.getElementById("sendBtn")
 
-if(amount===""){
-
-message.innerText="Enter an amount"
-
-return
-updateChart(amount);
-}
-
-message.innerText="Transfer Successful"
-
-addTransaction(amount)
-
-updateBalance(amount)
-
-}
-let balance = 24850;
-
-const sendBtn = document.getElementById("sendBtn");
+if(sendBtn){
 
 sendBtn.addEventListener("click", function(){
 
-let account = document.getElementById("account").value;
-
-let amount = document.getElementById("amount").value;
-
-let message = document.getElementById("transferMessage");
+let account = document.getElementById("account").value
+let amount = document.getElementById("amount").value
+let message = document.getElementById("transferMessage")
 
 if(account === "" || amount === ""){
-
-message.innerText = "Please enter account and amount";
-return;
-
+message.innerText = "Please enter account and amount"
+return
 }
 
-amount = parseFloat(amount);
+amount = parseFloat(amount)
 
 if(amount > balance){
+message.innerText = "Insufficient Balance"
+return
+}
 
-message.innerText = "Insufficient Balance";
-return;
+balance -= amount
+
+localStorage.setItem("balance", balance)
+
+updateBalanceDisplay()
+
+addTransaction(account,amount)
+
+updateChart()
+
+showNotification(amount)
+
+message.innerText = "Transfer Successful"
+
+})
 
 }
 
-balance -= amount;
 
-document.getElementById("balance").innerText = "$" + balance;
+/* =========================
+   TRANSACTION SYSTEM
+========================= */
 
-message.innerText = "Transfer Successful";
+function addTransaction(account,amount){
 
-addTransaction(account, amount);
+let table = document.getElementById("transactionTable")
 
-showNotification(amount);
+if(table){
 
-});
-
-function addTransaction(account, amount){
-
-let table = document.getElementById("transactionTable");
-
-let row = table.insertRow(-1);
+let row = table.insertRow(-1)
 
 row.innerHTML = `
 <td>Today</td>
 <td>Transfer to ${account}</td>
 <td>-$${amount}</td>
 <td>Completed</td>
-`;
+`
 
 }
 
-const ctx = document.getElementById("financeChart");
+let transactions = JSON.parse(localStorage.getItem("transactions")) || []
 
-let chartData = [2000,3500,4200,3800,5200,6100];
+transactions.push({
+date:"Today",
+description:`Transfer to ${account}`,
+amount:`-$${amount}`,
+status:"Completed"
+})
 
-const financeChart = new Chart(ctx,{
+localStorage.setItem("transactions", JSON.stringify(transactions))
+
+}
+
+
+/* =========================
+   LOAD SAVED TRANSACTIONS
+========================= */
+
+window.onload = function(){
+
+updateBalanceDisplay()
+
+let transactions = JSON.parse(localStorage.getItem("transactions")) || []
+
+let table = document.getElementById("transactionTable")
+
+if(table){
+
+transactions.forEach(t => {
+
+let row = table.insertRow(-1)
+
+row.innerHTML = `
+<td>${t.date}</td>
+<td>${t.description}</td>
+<td>${t.amount}</td>
+<td>${t.status}</td>
+`
+
+})
+
+}
+
+}
+
+
+/* =========================
+   FINANCE CHART
+========================= */
+
+const ctx = document.getElementById("financeChart")
+
+let chartData = [2000,3500,4200,3800,5200,6100]
+
+let financeChart
+
+if(ctx){
+
+financeChart = new Chart(ctx,{
 
 type:"line",
 
@@ -168,36 +258,64 @@ borderWidth:3
 }]
 },
 
-options:{responsive:true}
+options:{
+responsive:true
+}
 
-});
-
-function updateChart(amount){
-
-chartData.push(balance);
-
-financeChart.update();
+})
 
 }
+
+function updateChart(){
+
+if(!financeChart) return
+
+chartData.push(balance)
+
+financeChart.data.datasets[0].data = chartData
+
+financeChart.update()
+
+}
+
+
+/* =========================
+   NOTIFICATION SYSTEM
+========================= */
+
 function showNotification(amount){
 
-let note = document.createElement("div");
+let note = document.createElement("div")
 
-note.className = "notification";
+note.className = "notification"
 
-note.innerText = "$" + amount + " Transfer Completed";
+note.innerText = "$" + amount + " Transfer Completed"
 
-document.body.appendChild(note);
+document.body.appendChild(note)
 
 setTimeout(()=>{
-note.remove();
-},4000);
+note.remove()
+},4000)
 
 }
-const toggle=document.getElementById("darkToggle");
+const depositBtn = document.getElementById("depositBtn")
 
-toggle.addEventListener("click",()=>{
+if(depositBtn){
 
-document.body.classList.toggle("dark-mode");
+depositBtn.addEventListener("click", function(){
 
-});
+let amount = parseFloat(document.getElementById("depositAmount").value)
+
+if(!amount || amount <= 0) return
+
+balance += amount
+
+localStorage.setItem("balance", balance)
+
+updateBalanceDisplay()
+
+showNotification(amount)
+
+})
+
+}

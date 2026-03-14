@@ -65,20 +65,30 @@ John Smith
 
 </div>
 
-<div class="transfer-box">
 
+<div class="bank-actions">
+
+<div class="transfer-box">
 <h3>Quick Transfer</h3>
 
-<input id="account" type="text" placeholder="Recipient Account Number">
+<input type="text" id="recipient" placeholder="Recipient Account Number">
 
-<input id="amount" type="number" placeholder="Amount">
+<input type="number" id="amount" placeholder="Amount">
 
-<button id="sendBtn">Send Money</button>
-
-<p id="transferMessage"></p>
+<button class="send-btn" onclick="sendMoney()">Send Money</button>
 
 </div>
-</div>
+
+
+<div class="deposit-box">
+<h3>Deposit</h3>
+
+<input type="number" id="depositAmount" placeholder="Deposit Amount">
+
+<button class="deposit-btn" onclick="depositMoney()">Deposit</button>
+
+</div> <!--bank-actions -->
+
 
 <!-- STATS -->
 
