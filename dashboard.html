@@ -81,14 +81,21 @@ John Smith
 
 
 <div class="deposit-box">
-<h3>Deposit</h3>
 
-<input type="number" id="depositAmount" placeholder="Deposit Amount">
+<h3>Deposit Funds</h3>
 
-<button class="deposit-btn" onclick="depositMoney()">Deposit</button>
+<input type="text" placeholder="Deposit Source (Bank / Card)" id="depositSource">
 
+<input type="text" placeholder="Reference ID">
+
+<input type="number" id="depositAmount" placeholder="Amount">
+
+<button class="deposit-btn" onclick="depositMoney()">Confirm Deposit</button>
+
+</div>
 </div> <!--bank-actions -->
 
+<button onclick="withdrawMoney()" class="send-btn">Withdraw</button>
 
 <!-- STATS -->
 

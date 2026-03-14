@@ -100,28 +100,6 @@ document.body.classList.toggle("dark-mode");
 
 
 /* =========================
-   BANK BALANCE SYSTEM
-========================= */
-
-let balance = localStorage.getItem("balance")
-? parseFloat(localStorage.getItem("balance"))
-: 24850
-
-
-function updateBalanceDisplay(){
-
-let balanceText = document.getElementById("balance")
-
-if(balanceText){
-balanceText.innerText = "$" + balance.toLocaleString()
-}
-
-}
-
-updateBalanceDisplay()
-
-
-/* =========================
    SEND MONEY SYSTEM
 ========================= */
 
@@ -205,117 +183,132 @@ localStorage.setItem("transactions", JSON.stringify(transactions))
    LOAD SAVED TRANSACTIONS
 ========================= */
 
-window.onload = function(){
+let balance = localStorage.getItem("balance");
 
-updateBalanceDisplay()
-
-let transactions = JSON.parse(localStorage.getItem("transactions")) || []
-
-let table = document.getElementById("transactionTable")
-
-if(table){
-
-transactions.forEach(t => {
-
-let row = table.insertRow(-1)
-
-row.innerHTML = `
-<td>${t.date}</td>
-<td>${t.description}</td>
-<td>${t.amount}</td>
-<td>${t.status}</td>
-`
-
-})
-
+if(balance === null){
+balance = 24850;
+localStorage.setItem("balance", balance);
 }
 
-}
+document.getElementById("balance").innerText = "$" + Number(balance).toLocaleString();
 
 
-/* =========================
-   FINANCE CHART
-========================= */
+// SHOW NOTIFICATION
 
-const ctx = document.getElementById("financeChart")
+function notify(message){
 
-let chartData = [2000,3500,4200,3800,5200,6100]
+const note = document.createElement("div");
+note.className = "notification";
+note.innerText = message;
 
-let financeChart
-
-if(ctx){
-
-financeChart = new Chart(ctx,{
-
-type:"line",
-
-data:{
-labels:["Jan","Feb","Mar","Apr","May","Jun"],
-datasets:[{
-label:"Account Balance",
-data:chartData,
-borderWidth:3
-}]
-},
-
-options:{
-responsive:true
-}
-
-})
-
-}
-
-function updateChart(){
-
-if(!financeChart) return
-
-chartData.push(balance)
-
-financeChart.data.datasets[0].data = chartData
-
-financeChart.update()
-
-}
-
-
-/* =========================
-   NOTIFICATION SYSTEM
-========================= */
-
-function showNotification(amount){
-
-let note = document.createElement("div")
-
-note.className = "notification"
-
-note.innerText = "$" + amount + " Transfer Completed"
-
-document.body.appendChild(note)
+document.body.appendChild(note);
 
 setTimeout(()=>{
-note.remove()
-},4000)
+note.remove();
+},3000);
 
 }
-const depositBtn = document.getElementById("depositBtn")
 
-if(depositBtn){
 
-depositBtn.addEventListener("click", function(){
+// SEND MONEY
 
-let amount = parseFloat(document.getElementById("depositAmount").value)
+function sendMoney(){
 
-if(!amount || amount <= 0) return
+let recipient = document.getElementById("recipient").value;
+let amount = Number(document.getElementById("amount").value);
 
-balance += amount
+let balance = Number(localStorage.getItem("balance"));
 
-localStorage.setItem("balance", balance)
+if(recipient === "" || amount <= 0){
+notify("Enter valid details");
+return;
+}
 
-updateBalanceDisplay()
+if(amount > balance){
+notify("Insufficient Balance");
+return;
+}
 
-showNotification(amount)
+balance -= amount;
 
-})
+localStorage.setItem("balance", balance);
+
+document.getElementById("balance").innerText = "$" + balance.toLocaleString();
+
+addTransaction("Transfer to " + recipient, "- $" + amount);
+
+notify("Transaction Successful");
+
+}
+
+
+// DEPOSIT
+
+function depositMoney(){
+
+let amount = Number(document.getElementById("depositAmount").value);
+
+if(amount <= 0){
+notify("Enter valid deposit");
+return;
+}
+
+let balance = Number(localStorage.getItem("balance"));
+
+balance += amount;
+
+localStorage.setItem("balance", balance);
+
+document.getElementById("balance").innerText = "$" + balance.toLocaleString();
+
+addTransaction("Deposit", "+ $" + amount);
+
+notify("Deposit Successful");
+
+}
+
+
+// WITHDRAW
+
+function withdrawMoney(){
+
+let amount = Number(prompt("Enter Withdrawal Amount"));
+
+let balance = Number(localStorage.getItem("balance"));
+
+if(amount > balance){
+notify("Insufficient Balance");
+return;
+}
+
+balance -= amount;
+
+localStorage.setItem("balance", balance);
+
+document.getElementById("balance").innerText = "$" + balance.toLocaleString();
+
+addTransaction("ATM Withdrawal", "- $" + amount);
+
+notify("Withdrawal Successful");
+
+}
+
+
+// ADD TRANSACTION
+
+function addTransaction(desc, amount){
+
+let table = document.getElementById("transactionTable");
+
+let row = table.insertRow(1);
+
+let date = new Date().toLocaleDateString();
+
+row.innerHTML = `
+<td>${date}</td>
+<td>${desc}</td>
+<td>${amount}</td>
+<td>Completed</td>
+`;
 
 }
