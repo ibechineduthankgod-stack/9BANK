@@ -238,7 +238,8 @@ document.getElementById("balance").innerText = "$" + balance.toLocaleString();
 addTransaction("Transfer to " + recipient, "- $" + amount);
 
 notify("Transaction Successful");
-
+chartData.push(balance);
+financeChart.update();
 }
 
 
@@ -264,7 +265,8 @@ document.getElementById("balance").innerText = "$" + balance.toLocaleString();
 addTransaction("Deposit", "+ $" + amount);
 
 notify("Deposit Successful");
-
+chartData.push(balance);
+financeChart.update();
 }
 
 
@@ -312,3 +314,39 @@ row.innerHTML = `
 `;
 
 }
+// CREATE USER ACCOUNT
+
+function createAccount(name){
+
+let accountNumber = Math.floor(100000000 + Math.random() * 900000000);
+
+localStorage.setItem("userName", name);
+localStorage.setItem("accountNumber", accountNumber);
+localStorage.setItem("balance", 25000);
+
+}
+// LOAD USER DATA
+
+let userName = localStorage.getItem("userName");
+let accountNumber = localStorage.getItem("accountNumber");
+
+if(userName){
+document.querySelector(".welcome").innerText = "Welcome Back, " + userName;
+}
+
+if(accountNumber){
+document.querySelector(".balance-card p").innerText =
+"Account Number: " + accountNumber;
+}
+function generateCard(){
+
+let cardNumber = "";
+
+for(let i=0;i<4;i++){
+cardNumber += Math.floor(1000 + Math.random()*9000) + " ";
+}
+
+document.querySelector(".card-number").innerText = cardNumber;
+
+}
+generateCard();

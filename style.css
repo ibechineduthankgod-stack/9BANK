@@ -439,7 +439,7 @@ padding:10px;
 }
 
 .transfer-box button{
-background:#0b3d91;
+background:green;
 color:white;
 padding:10px;
 border:none;
@@ -569,25 +569,15 @@ border-bottom:1px solid #eee;
 text-align:left;
 }
 .notification{
-
 position:fixed;
-
 top:20px;
-
 right:20px;
-
-background:#0b3d91;
-
+background:#16a34a;
 color:white;
-
 padding:15px 25px;
-
-border-radius:8px;
-
-box-shadow:0 10px 20px rgba(0,0,0,0.2);
-
+border-radius:10px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
 animation:slideIn 0.4s;
-
 }
 
 @keyframes slideIn{
@@ -735,4 +725,25 @@ padding:25px;
 border-radius:12px;
 box-shadow:0 10px 20px rgba(0,0,0,0.1);
 width:100%;
+}
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:220px;
+height:100%;
+background:#0b3d91;
+padding:30px;
+color:white;
+}
+
+.sidebar a{
+display:block;
+margin:20px 0;
+color:white;
+text-decoration:none;
+}
+
+.dashboard{
+margin-left:240px;
 }
